@@ -104,8 +104,8 @@ class ExtractWordsFromAudio(EventsTransform):
         if language not in language_codes:
             raise ValueError(f"Language {language} not supported")
 
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        compute_type = "float16"
+        device = "cpu" # whisperx doesn't support AMD GPU
+        compute_type = "default"
 
         with tempfile.TemporaryDirectory() as output_dir:
             logger.info("Running whisperx via uvx...")
